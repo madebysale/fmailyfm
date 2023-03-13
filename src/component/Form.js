@@ -1246,7 +1246,7 @@ const Foam = () => {
                     //   value={discount}
                     //   onChange={(e) => setdiscount(e.target.value)}
                   />
-                </div>{" "}
+                </div>{""}
               </td>
 
               <td style={{}}>

@@ -1,7 +1,7 @@
 {
   "name": "vibzfm",
   "version": "0.1.0",
-  "homepage": "https://madebysale.github.io/fmailyfm",
+  "homepage": "https://madebysale/fmailyfm.github.io",
   "private": false,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
