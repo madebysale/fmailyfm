@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/fmailyfm.git/static/css/main.b2e131ba.css",
+    "main.js": "/fmailyfm.git/static/js/main.3f401b9d.js",
+    "static/media/fm_logo.png": "/fmailyfm.git/static/media/fm_logo.8ab00a202cf2f9daeaa1.png",
+    "index.html": "/fmailyfm.git/index.html",
+    "main.b2e131ba.css.map": "/fmailyfm.git/static/css/main.b2e131ba.css.map",
+    "main.3f401b9d.js.map": "/fmailyfm.git/static/js/main.3f401b9d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b2e131ba.css",
+    "static/js/main.3f401b9d.js"
+  ]
+}
