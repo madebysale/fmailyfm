@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 
-import { DatePicker } from "antd";
+import { DatePicker} from "antd";
 import "antd/dist/reset.css";
 import { Formik, Field } from "formik";
 // import DateRangePicker from './DateRangePicker';
@@ -24,8 +24,10 @@ import Addrow from "./Addrow";
 import Footer from "./Footer";
 import DateRangePicker from "./DateRangePicker";
 import TableRows from "./TableRows";
-import {  Link, useNavigate ,  } from "react-router-dom";
+import {  Link, useNavigate  } from "react-router-dom";
 import Table from "react-bootstrap/esm/Table";
+import { Termcondition } from "./Termcondition";
+import  Card from "react-bootstrap/Card";
 
 // import Form from 'react-bootstrap/Form';
 const { RangePicker } = DatePicker;
@@ -45,6 +47,12 @@ const validationSchema = Yup.object({
     .required("Required"),
 
   email: Yup.string().email("Invalid email address").required("Required"),
+//   product_type:
+// Yup.string().required("Please select an option"),
+//   rate:
+// Yup.string().required("Required"),
+
+  // RangePicker: Yup.date().required("Required"),
 
   // product_type: Yup.string()
   // .required('Required'),
@@ -54,6 +62,9 @@ const validationSchema = Yup.object({
     Yup.ref("start_date"),
     "end date can't be before start date"
   ),
+
+  termsAndConditions: Yup.bool()
+  .oneOf([true], 'accept the t&C'),
 });
 
 // const initialValues = {
@@ -106,10 +117,11 @@ const Foam = () => {
 
   // const[apidata,setapidata] =useState([]);
 
-  const [dates, setDates] = useState("");
+  const [dates, setDates] = useState([]);
   const [startdate, setstartdate] = useState("");
   const [enddate, setenddate] = useState("");
   const [qty, setqty] = useState("");
+  const[mysign,setmysign]=useState("")
 
 
   const [fields, setFields] = useState([
@@ -199,6 +211,14 @@ const Foam = () => {
 
     // console.log(event.week.val1);
   };
+
+
+    const handle=(eve)=>{
+       setmysign(eve)
+      //  console.log(eve,"dcdcvbgvcx")
+    }
+console.log(mysign,'dd')
+
  
   var calrate;
   const ratecaculate = () => {
@@ -209,22 +229,7 @@ const Foam = () => {
   };
 
   function handleChange(i, event,fieldname) {
-    if(fieldname==='datepicker'){
-        console.log(startdate,enddate,'fd')
-        const values = [...fields];
-    values[i]['runDates'] = {'startdate':startdate,'enddate':enddate};
-    setFields(values);
-    }
-    //esle if(fieldname==='hrs'){
-    //     console.log(event,'adfsddsa')
-    //     const values = [...fields];
-    //     values[i]['perWeeks'] = {'event':event,'monday':monday};
-    //     setFields(values);
-    //     console.log(fields);
-    // }
 
-    
-    else{
     const values = [...fields];
     values[i][event.target.name] = event.target.value;
 
@@ -310,25 +315,18 @@ const Foam = () => {
 
     setFields(values);
     console.log(fields);
+
+       
+
+
+
     }
-  }
+  // }
     
 
-  
-//   const handleCalculate = () => {
-//     const newData = calculate(); // assume calculate() function return an array
-//     setdata(newData);
-//   }
 
-//   function handleDateChange(date, index) {
-//     const Values = [...fields];
-//     Values[index]['startdate'] = date;
-//     Values[index]['enddate'] = date;
-//     setFields(Values);
-    
-//   console.log(Values,'as')
-//   }
 
+console.log(startdate,enddate,'startdate-ds')
 
   function handleAdd() {
     // const values = [...fields];
@@ -343,7 +341,7 @@ const Foam = () => {
       cost_tax: "",
       discounted_cost: "",
       total: "",
-      monday: 0,
+      monday: "",
       tuesday: 0,
       wednesday: 0,
       thursday: 0,
@@ -363,137 +361,19 @@ const Foam = () => {
 
 
 
-  // var a = moment(dates[1]);
-  // var b = moment(dates[0]);
-  //   var c= a.diff(b, 'days')   // =1
-
-  //   console.log(c)
-
-  // var a = moment(enddate);
-  // var b = moment(startdate);
-  //   var c= a.diff(b, 'days')  // =1
-  //   console.log(c,'c')
-  //   var d=c/7*event
-  //   console.log(d,'d')
-
-  //   var intvalue = Math.floor( "55" )
-  // // //   // console.log(dates[0])
-  // // //   // console.log(values[0].$d)
-  //   console.log( intvalue)
-  //   // setqty(c)
-
-  // let start = moment(startdate, "YYYY-MM-DD"); //Pick any format
-  // let end = moment(enddate, "YYYY-MM-DD"); //right now (or define an end date yourself)
-  // let weekdayMonCounter = 0;
-  // let weekdayTueCounter = 0;
-  // let weekdayWedCounter = 0;
-  // let weekdayThuCounter = 0;
-  // let weekdayFriCounter = 0;
-  // let weekdaySatCounter = 0;
-  // let weekdaySunCounter = 0;
-
-  // while (start <= end) {
-  //   if (start.format("ddd") === "Mon") {
-  //     weekdayMonCounter++;
-  //     start = moment(start, "YYYY-MM-DD").add(1, "days");
-  //   } else if (start.format("ddd") === "Tue") {
-  //     weekdayTueCounter++;
-  //     start = moment(start, "YYYY-MM-DD").add(1, "days");
-  //   } else if (start.format("ddd") === "Wed") {
-  //     weekdayWedCounter++;
-  //     start = moment(start, "YYYY-MM-DD").add(1, "days");
-  //   } else if (start.format("ddd") === "Thu") {
-  //     weekdayThuCounter++;
-  //     start = moment(start, "YYYY-MM-DD").add(1, "days");
-  //   } else if (start.format("ddd") === "Fri") {
-  //     weekdayFriCounter++;
-  //     start = moment(start, "YYYY-MM-DD").add(1, "days");
-  //   } else if (start.format("ddd") === "Sat") {
-  //     weekdaySatCounter++;
-  //     start = moment(start, "YYYY-MM-DD").add(1, "days");
-  //   } else if (start.format("ddd") === "Sun") {
-  //     weekdaySunCounter++;
-  //     start = moment(start, "YYYY-MM-DD").add(1, "days");
-  //   }
-  // }
-
-  // console.log(weekdayMonCounter)
-  // console.log(weekdayTueCounter)
-  // console.log(weekdayWedCounter)
-  // console.log(weekdayThuCounter)
-  // console.log(weekdayFriCounter)
-  // console.log(weekdaySatCounter)
-  // console.log(weekdaySunCounter)
-
-  // var total_qty =
-  //   weekdayMonCounter * monday +
-  //   weekdayTueCounter * tuesday +
-  //   weekdayWedCounter * wednesday +
-  //   weekdayThuCounter * thursday +
-  //   weekdayFriCounter * friday +
-  //   weekdaySatCounter * saturday +
-  //   weekdaySunCounter * sunday;
-
-  // console.log(total_qty);
 
   var orderid = Math.floor(100000 + Math.random() * 900000);
 
   console.log(orderid)
 
-  //  weekdayCounter++; //add 1 to your counter if its not a weekend day
-  //  }
-  //  start = moment(start, 'YYYY-MM-DD').add(1, 'days'); //increment by one day
-  // }
-  // var val=weekdayCounter*event
-  // console.log(weekdayCounter);
 
-  // console.log(val)
-
-  // const rowsInput={
-  //   product_type:'',
-  //  run_dates:'',
-  //  per_week:'',
-  //  cost:'',
-  //  discount:'',
-  //  cost_tax:'',
-  //  discounted_cost:'',
-  // }
-  // setRowsData([...rowsData, rowsInput])
-
-  // // }
-  // const deleteTableRows = (index)=>{
-  // const rows = [...rowsData];
-  // rows.splice(index, 1);
-  // setRowsData(rows);
-  // }
-
-  // const handleChange = (index, evnt)=>{
-
-  // const { name, value } = evnt.target;
-  // const rowsInput = [...rowsData];
-  // rowsInput[index][name] = value;
-  // setRowsData(rowsInput);
-
-  // }
-  // const ButtonPress = () => {
-   
-  // };
 
  
 
   return (
-    <div className="form-container">
-      {/* <Formik
-      initialValues={initialValues}
-      validationSchema={validationSchema}
-      onSubmit={(values, { setSubmitting }) => {
-        // submit logic here
-        console.log(values);
-        alert(values)
-        setSubmitting(false);
-      }}
-    >
-      {({ errors,values, touched, isSubmitting ,handleChange}) => ( */}
+ 
+    <Card className="form-container">
+    
       <Formik
         initialValues={{
           Contract_date: "",
@@ -503,10 +383,16 @@ const Foam = () => {
           event: "",
           phone: "",
           email: "",
-          // product_type: "",
+        //  perWeeks:"",
           start_date: "",
           end_date: "",
-          // orderid:orderid,
+          product_type:"",
+          termsAndConditions:false,
+          
+          // rate:"",
+
+        
+         
           
         }}
         
@@ -519,18 +405,7 @@ const Foam = () => {
       onSubmit={(values) => {
         console.log(values, "okkkk");
 
-        
-        // props.handlefunction({"asa":values}) 
-
-        
-        // props.handlefunction({"values":values})
-
-        // {
-        //   for(let i=0;i<fields.length;i++){
-        //     fields[i]
-        //   }
-        //   console.log(fields[i])
-        // }
+  
         
  
        
@@ -544,126 +419,54 @@ const Foam = () => {
             phone: values.phone,
             email: values.email,     
             orderid: orderid,
+            sign:mysign,
             // fields:fields,
-
-          
+            fields:[
+                fields.map((item,index)=>(
+                 
+                    { 
+                         product_type:fields[index].product_type,
+                         rate:fields[index].rate,
+                         discount:fields[index].discount,
+                         start_date:moment(fields[index].runDates.startdate,'YY-MM-DD'),
+                         end_date:moment(fields[index].runDates.enddate,'YY-MM-DD'),
+                         discount:fields[index].discount,
+                         discounted_cost:fields[index].discounted_cost,
+                         cost:fields[index].cost,
+                         cost_tax:fields[index].cost_tax,
+                         monday: fields[index].monday,
+                         tuesday: fields[index].tuesday,
+                         wednesday: fields[index].wednesday,
+                         thursday: fields[index].thursday,
+                         friday: fields[index].friday,
+                         saturday: fields[index].saturday,
+                         sunday:  fields[index].sunday,
+                         qty: fields[index].qty,
+                         total:fields[index].total,
+                    }
+                
+                ))
+              
+              
+            ]
+         
              
 
-           fields: [
           
-              
-            {
-               product_type:fields[0].product_type,
-               rate:fields[0].rate,
-               discount:fields[0].discount,
-               start_date:moment(fields[0].runDates.startdate,'YY-MM-DD'),
-               end_date:moment(fields[0].runDates.enddate,'YY-MM-DD'),
-               discount:fields[0].discount,
-               discounted_cost:fields[0].discounted_cost,
-               cost:fields[0].cost,
-               cost_tax:fields[0].cost_tax,
-               monday: fields[0].monday,
-               tuesday: fields[0].tuesday,
-               wednesday: fields[0].wednesday,
-               thursday: fields[0].thursday,
-               friday: fields[0].friday,
-               saturday: fields[0].saturday,
-               sunday:  fields[0].sunday,
-               qty: fields[0].qty,
-               total:fields[0].total,
-            },
-            {
-             product_type:fields[1].product_type,
-               rate:fields[1].rate,
-               discount:fields[1].discount,
-               start_date:moment(fields[1].runDates.startdate,'YY-MM-DD'),
-               end_date:moment(fields[1].runDates.enddate,'YY-MM-DD'),
-               discount:fields[1].discount,
-               discounted_cost:fields[1].discounted_cost,
-               cost:fields[1].cost,
-               cost_tax:fields[1].cost_tax,
-             monday: fields[1].monday,
-            tuesday: fields[1].tuesday,
-            wednesday: fields[1].wednesday,
-            thursday: fields[1].thursday,
-            friday: fields[1].friday,
-            saturday: fields[1].saturday,
-            sunday:  fields[1].sunday,
-            qty: fields[1].qty,
-            total:fields[1].total
 
-            } ,
-            // {
-            //    product_type:fields[2].product_type,
-            //    rate:fields[2].rate,
-            //    discount:fields[2].discount,
-            //    start_date:moment(fields[2].runDates.startdate,'YY-MM-DD'),
-            //    end_date:moment(fields[2].runDates.enddate,'YY-MM-DD'),
-            //    discount:fields[2].discount,
-            //    discounted_cost:fields[2].discounted_cost,
-            //    cost:fields[2].cost,
-            //    cost_tax:fields[2].cost_tax,
-            //    monday: fields[2].monday,
-            //    tuesday: fields[2].tuesday,
-            //    wednesday: fields[2].wednesday,
-            //    thursday: fields[2].thursday,
-            //    friday: fields[2].friday,
-            //    saturday: fields[2].saturday,
-            //    sunday:  fields[2].sunday,
-            //    qty: fields[2].qty,
-            //    total:fields[2].total,
-
-            // } ,
-            // {
-            //  product_type:fields[3].product_type,
-            //    rate:fields[3].rate,
-            //    discount:fields[3].discount,
-            //    start_date:moment(fields[3].runDates.startdate,'YY-MM-DD'),
-            //    end_date:moment(fields[3].runDates.enddate,'YY-MM-DD'),
-            //    discount:fields[3].discount,
-            //    discounted_cost:fields[3].discounted_cost,
-            //    cost:fields[3].cost,
-            //    cost_tax:fields[3].cost_tax,
-            //  monday: fields[3].monday,
-            // tuesday: fields[3].tuesday,
-            // wednesday: fields[3].wednesday,
-            // thursday: fields[3].thursday,
-            // friday: fields[3].friday,
-            // saturday: fields[3].saturday,
-            // sunday:  fields[3].sunday,
-            // qty: fields[3].qty,
-            // total:fields[3].total,
-
-            // } 
-          ]
-            
-            // per_week: event,
-            // rate: rate,
-            // discount: discount,
-            // cost: cost,
-            // cost_tax: cost_tax,
-            // discounted_cost: discounted_cost,
-            // start_date: dates[1],
-            // end_date: dates[1],
-            // monday: monday,
-            // tuesday: tuesday,
-            // wednesday: wednesday,
-            // thursday: thursday,
-            // friday: friday,
-            // saturday: saturday,
-            // sunday: sunday,
-            // qty: total_qty,
-            // orderid: orderid,
-          });
+        
+     
+          }).then((resp)=>{
+              if (resp.data.code!==200){
+                navigate('/invoice')
+              }
+          })
         }}
       >
         {({ errors, touched, values, handleSubmit ,isSubmitting }) => (
           <Form className="form-con" onSubmit={handleSubmit}>
            
-            {/* {
-          apidata.map((data)=>{
-            console.log("err",data)
-             return( */}
+          
 
             <div className="form">
               <div className="contact-detail">
@@ -792,6 +595,7 @@ const Foam = () => {
                     ) : null}
                   </div>
                 </div>
+
               </div>
 
               <div className="logo-container">
@@ -815,159 +619,15 @@ const Foam = () => {
               <div className="container">
                 <div className="row">
                   <div className="">
-                    {/* <Table className="">
-                      <thead className="table-head">
-                        <tr>
-                          <th> product type</th>
-                          <th>Run Dates</th>
-                          <th>per week</th>
-                          <th>Rate</th>
-                          <th>Discount</th>
-                          <th>Cost</th>
-                          <th>Cost(/W tax)</th>
-                          <th style={{ width: "10px" }}>discounted cost</th>
-                        </tr>
-                      </thead>
-
-                      <tbody>
-                        <tr>
-                          <td style={{}}>
-                            <div className="form-group">
-                              <select
-                                name="product_type"
-                                id="dropdown-input"
-                                // style={{appearance:'unset'}}
-                                className="  dropdown "
-                                onChange={(e) =>
-                                  setproduct_type(e.target.value)
-                                }
-                              >
-                                <option value={product_type}>
-                                  Select an option
-                                </option>
-                                <option value="spots">spots</option>
-                                <option value="Mentions">Mentions</option>
-                                <option value="Half Hours">Half Hours </option>
-                                <option value="outside Broadcast">
-                                  outside Broadcast
-                                </option>
-                              </select>
-                            </div>
-                          </td>
-                          <td style={{}}>
-                            <div className="form-group">
-                              <div
-                                style={{ border: "none" }}
-                                className="date-range"
-                              >
-                                <RangePicker
-                                  onChange={(values) => {
-                                    setDates(
-                                      values.map((item) => {
-                                        return item;
-                                      })
-                                    );
-
-                                    
-
-                                    setstartdate(values[0].$d);
-                                    setenddate(values[1].$d);
-                                  }}
-                                />
-                              </div>
-
-                          
-                            </div>
-                          </td>
-                          <td>
-                            <div className="form-group">
-                              <Popup
-                                className="form-control"
-                                handlefunction={calculate}
-                              />
-                            </div>
-                          </td>
-                          <td style={{}}>
-                            <div className="form-group">
-                              <input
-                                name="Rate"
-                                type="number"
-                                min={0}
-                                className="form-control"
-                                value={rate}
-                                onChange={(e) => setrate(e.target.value)}
-                              />
-                            </div>
-                          </td>
-                          <td style={{}}>
-                            <div className="form-group">
-                              <input
-                                name="Discount"
-                                type="number"
-                                min={0}
-                                className="form-control"
-                                value={discount}
-                                onChange={(e) => setdiscount(e.target.value)}
-                              />
-                            </div>{" "}
-                          </td>
-                          <td style={{}}>
-                            <div className="form-group">
-                              <input
-                                name="Cost"
-                                type="text"
-                                className="form-control"
-                                value={ratecaculate()}
-                              />
-                            </div>
-                          </td>
-                          <td style={{}}>
-                            <div className="form-group">
-                              <input
-                                name="cast_tax"
-                                type="text"
-                                className="form-control"
-                                value={taxcost()}
-                              />
-                            </div>
-                          </td>
-                          <td style={{}}>
-                            <div className="form-group">
-                              <input
-                                name="Discounted_cost"
-                                type="text"
-                                className="form-control"
-                                value={discountcost()}
-                              />
-                            </div>
-                          </td>
-                        </tr>
-
-                        <TableRows
-                          rowsData={rowsData}
-                          deleteTableRows={deleteTableRows}
-                          handleChange={handleChange}
-                        />
-                      </tbody>
-                    </Table> */}
-                    {/* <div style={{float:'right',}}><button  className="btn btn-outline-success" onClick={addTableRows}>+</button><span style={{fontWeight:500,padding:7}}>ADD item</span></div> */}
-                    {/* <button
-                      style={{ float: "right" }}
-                      className="btn btn-outline-success"
-                      onClick={addTableRows}
-                    >
-                      + add item
-                    </button> */}
-                      {/* ////////////////////////////////////////////////////////////////////// chagpt */}
-
+                 
                          
         <div>
       <Table>
-        <thead>
-          <tr>
+        <thead >
+          <tr className="th-s">
             <th>Product Type</th>
             <th>Run Dates</th>
-            <th>Per Weeks</th>
+            <th className="th-perwk">Per Weeks</th>
             <th>Rate</th>
             <th>Discount</th>
             <th>Cost</th>
@@ -982,7 +642,10 @@ const Foam = () => {
             <tr key={index}>
               <td>
                 <div className="form-group">
-                  <select
+                  <Field
+                  value={field.product_type}
+                    
+                     as="select"
                     name="product_type"
                     id="dropdown-input"
                     // style={{appearance:'unset'}}
@@ -990,65 +653,112 @@ const Foam = () => {
                     // onChange={(e) => setproduct_type(e.target.value)}
                     onChange={(event) => handleChange(index, event)}
                   >
-                    <option value={field.product_type}>Select an option</option>
-                    <option value="spots">spots</option>
+                    {/* <option   value="" >Select an option</option> */}
+                    <option selected value="spots">spots</option>
                     <option value="Mentions">Mentions</option>
                     <option value="Half Hours">Half Hours </option>
                     <option value="outside Broadcast">outside Broadcast</option>
-                
-                  </select>
+                    {/* {errors.product_type && touched.product_type ? (
+                      <div className="error-message">
+                      <p>sdsdsd</p>
+                      </div>
+                    ) : null} */}
+                  </Field>
+                 {touched.product_type ? (
+                      <div className="error-message">Please select an option</div>
+                    ) : null} 
+               
                 </div>
               </td>
 
               <td style={{}}>
-                <div className="form-group">
+                <div style={{width:"116px"}} className="form-group  " >
                   <div style={{ border: "none" }} className="date-range">
                     <RangePicker
+
+                     
+
                     name="runDates"
-                    // selected={}
-                      onCalendarChange={(values,event) =>{
-                        handleChange(index,values,'datepicker')
+                    
+               
+                      onChange={(values,event) =>{
+                          if(event.length==0){
+                              console.log('requires')
+                            }
+                            else{
+                              console.log('not')
+                            }
+                            console.log(values.length)
+                            console.log(event.length,'event')
+                       
                         setDates(
+                        
                           values.map((item) =>{
+                          
+                          
                             return item;
+                            
                           })
                         );
+                        setstartdate(event[0].$d)
+                        setenddate(event[1].$d)
 
-                          // console.log(values);
-                         // handleDateChange(setstartdate(values[0].$d),setenddate(values[1].$d))
-                        //   onChange={(event) => handleChange(index, event)}                  
+
+                        
+                        // }
+                          
+                          const valuess = [...fields];
+                      valuess[index]['runDates'] = {'startdate':values[0].$d,'enddate':values[1].$d};
+                      setFields(valuess);
+                                      
                         setstartdate(values[0].$d);
-                        setenddate(values[0].$d);
+                        setenddate(values[1].$d);
                         // console.log(values)
+                        console.log(values)
+
+
+                      
                       }}
+                      
+                      
                     />
+                    
+                    
                   </div>
+                  {dates && dates.length<2 ? (
+                      <span style={{textAlign:"center"}} className="error-message">please select date range</span>
+                    ) : null}
 
                   {/* <DateRangePicker  /> */}
                   {/* console.log(value) */}
                 </div>
               </td>
 
-              {/* <td><input type="text" name="perWeeks" value={field.perWeeks} onChange={(event) => handleChange(index, event)} /></td> */}
+           
               <td>
-                <div className="form-group">
+                <div 
+                className="form-group"
+                style={{width:"110px"}}
+                >
 
-                <Button className="popup-btn" onClick={handleShow}>
+             
                   <Form.Control
+                  
                     onClick={handleShow}
-                    className="popup-control"
+                    className="popup-btn"
                     type="total"
                     value={field.total}
-                    placeholder="total"
+                    placeholder="Select Days"
                   />
-                </Button>
+                {/* </button> */}
 
                 <Modal className="pop-btn" show={show} onHide={handleClose}>
+                  
                   <Modal.Header closeButton>
-                    <Modal.Title> select Days</Modal.Title>
+                    <Modal.Title>select Days</Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
-                    <Form className="popup-container">
+                    <Form className="popup-container" validated={false} >
                       <Form.Group
                         className="popup-grp mb-3 px-3"
                         id="mon"
@@ -1058,7 +768,8 @@ const Foam = () => {
                         <Form.Label name="monday" className="label-con1">
                           Monday
                         </Form.Label>
-                        <Form.Control
+                        <Form.Control 
+
                           className="popup-control"
                           type="number"
                           min={0}
@@ -1067,6 +778,7 @@ const Foam = () => {
                           name="monday"
                           placeholder="monday"
                           autoFocus
+                          
                         />
                       </Form.Group>
                       <Form.Group
@@ -1181,12 +893,20 @@ const Foam = () => {
                         <Form.Control
                           className="popup-control"
                           type="total"
+                           name='total'
+                           min={1}
                           value={field.total}
                           onChange={(event) => handleChange(index, event)}
                           placeholder="total"
                         />
+                     
+                        
+                        
                       </Form.Group>
                     </Form>
+                 
+                    
+                   
                   </Modal.Body>
                   <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
@@ -1195,6 +915,7 @@ const Foam = () => {
                     <Button variant="primary" onClick={handleClose}>
                       ok
                     </Button>
+                    
                   </Modal.Footer>
                 </Modal>
                     
@@ -1205,18 +926,9 @@ const Foam = () => {
 
 
 
-
-                  {/* <Popup
-                   name="perWeeks"
-                    className="form-control"
-                     handlefunction = {calculate}
-                    //  defaultValue="Search..."
-                    //  onChange={(event)=>handleChange(index,calculate(event.fin),'hrs')}
-                    //  onChange={(Values) =>handleChange(index, calculate(setevent))}
-                     
-                  /> */}
                   
                 </div>
+             
               </td>
 
               <td style={{}}>
@@ -1226,11 +938,12 @@ const Foam = () => {
                     onChange={(event) =>handleChange(index, event)}
                     name="rate"
                     type="number"
-                    min={0}
-                    className="form-control"
-                    //   value={rate}
-                    //   onChange={(e) => setrate(e.target.value)}
+                    min={1}
+                    className="form-control as"
+                    // required
+                    
                   />
+               
                 </div>
               </td>
 
@@ -1242,9 +955,8 @@ const Foam = () => {
                     name="discount"
                     type="number"
                     min={0}
-                    className="form-control"
-                    //   value={discount}
-                    //   onChange={(e) => setdiscount(e.target.value)}
+                    className="form-control as"
+                   
                   />
                 </div>{""}
               </td>
@@ -1255,9 +967,10 @@ const Foam = () => {
                     value={field.cost}
                     onChange={(event) => handleChange(index, event)}
                     name="cost"
-                    type="text"
-                    className="form-control"
-                    //   value={ratecaculate()}
+                    min={0}
+                    type="number"
+                    className="form-control as"
+                
                   />
                 </div>
               </td>
@@ -1268,9 +981,10 @@ const Foam = () => {
                     value={field.cost_tax}
                     onChange={(event) => handleChange(index, event)}
                     name="cost_tax"
-                    type="text"
-                    className="form-control"
-                    //   value={taxcost()}
+                    min={0}
+                    type="number"
+                    className="form-control as"
+                  
                   />
                 </div>
               </td>
@@ -1281,8 +995,10 @@ const Foam = () => {
                     value={field.discounted_cost}
                     onChange={(event) => handleChange(index, event)}
                     name="discounted_cost"
-                    type="text"
-                    className="form-control"
+                    min={0}
+                    type="number"
+                    className="form-control as"
+                    
                     //   value={discountcost()}
                   />
                 </div>
@@ -1335,39 +1051,40 @@ const Foam = () => {
 
             {/* <Addrow /> */}
 
-            <SignaturePad />
+            <SignaturePad  setsign={handle} />
+
+
 
             <div className="chcek-box">
-              <input type="checkbox"></input>
-              <a href="#">Accept terms & conditions</a>
-            </div>
+              <div className="term-check">
+              <Field type="checkbox" name="termsAndConditions" /> 
+            <span className="term"> <Termcondition/></span> 
+              </div>
+          
+             
+                  
+            
+            <div>
+            {errors.termsAndConditions && touched.termsAndConditions ? (
+                      <div className="error-message">{errors.termsAndConditions}</div>
+                    ) : null}
+                  </div>
+          </div>
 
 
              
-         
-               {/* <Link to={{
-                 pathname: '/invoice',
-                 values,
-
-                
-                 
-              }}>
-              <Button type="submit" className="submit-button">Submit</Button>
-              </Link>  */}
               
                
-               
               <Button type="submit" 
-              // onsubmit={("/invoice")}
-              onclick={()=>navigate("/invoice")}
+             
                className="submit-button">Submit</Button>
-
           
           </Form>
         )}
       </Formik>
       <Footer />
-    </div>
+    </Card>
+   
   );
 };
 

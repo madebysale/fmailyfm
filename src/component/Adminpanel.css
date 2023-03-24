@@ -1,0 +1,113 @@
+.heading{
+    text-align: center;
+    color: orangered;
+
+}
+
+.img-ad{
+    width: 150px;
+    height: 70px;
+
+    
+
+}
+
+.order{
+  background-color: aquamarine;
+}
+
+
+.img-con-ad{
+    float: right;
+    margin: 30px ;
+    margin-right:120px
+  
+}
+
+
+
+.input{
+    margin-left: 100px ;
+    margin-top: 50px;
+    border: 2px solid orangered;
+    border-radius: 7px;
+}
+
+.ad-table {
+    margin-left: 90px;
+    width: 90%;
+  
+   border-top: 2px solid black;
+}
+
+.plus-btn{
+  cursor: pointer;
+
+}
+.plus-btn:hover{
+  color: orangered;
+  
+}
+
+.head-row{
+  border-top: 3px solid black ;
+  border-bottom: 3px solid black ;
+  line-height: 35px;
+  background: orangered;
+  color: white;
+}
+
+.sec-head{
+  border-top: 1px solid black ;
+  border-bottom: 1px solid black ;
+  line-height: 15px;
+}
+
+
+ 
+.pagination {
+  display: inline-block;
+  margin-top: 20px;
+  float: right;
+  position: sticky;
+  bottom: 10px;
+  right: 50px;
+}
+
+.pagination li {
+  display: inline-block;
+  margin: 0 5px;
+}
+
+.pagination button {
+  background-color: #fff;
+  color: orangered;
+  border: 1px solid orangered;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+
+.pagination button:hover {
+  background-color: orangered;
+  color: #fff;
+}
+
+.pagination .active button {
+  background-color: orangered;
+  color: #fff;
+  border: 1px solid orangered;
+}
+
+
+.view-img{
+  width: 25px;
+  
+}
+
+.view-img:hover{
+  color:  orangered;
+  cursor: pointer;
+}
+
+
+

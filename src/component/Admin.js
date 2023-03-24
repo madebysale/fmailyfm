@@ -1,12 +1,30 @@
 import { Input, } from 'antd'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "antd/dist/reset.css";
 import mylogo from "../component/fm_logo.png";
 import Table from "react-bootstrap/Table";
 import "./invoice.css";
+import axios from 'axios';
+import moment from 'moment';
 
 
 const Admin = () => {
+const[finaldata ,setfinaldata] =useState([])
+
+
+
+  useEffect(() => {
+    axios
+      .post("http://localhost:8000/finaldata")
+
+      .then((response) => {
+        setfinaldata(response.data);
+        
+        console.log(response,"sds");
+      });
+  }, []);
+
+
   return (
     <>
     <div>
@@ -27,10 +45,13 @@ const Admin = () => {
       <Table>
         <thead>
           <tr>
-                   <th>name</th>
-                 <th>Run Dates</th>
-                    <th >RUN WKS</th>
-                    <th >Run Times</th>
+                       <th>name</th>
+                       <th>phone</th>
+                       <th>Email</th>
+                       <th>Product Type</th>
+
+
+                  <th>Run Dates</th>
                     <th >Mon</th>
                     <th >Tue</th>
                     <th >Wed</th>
@@ -39,20 +60,65 @@ const Admin = () => {
                     <th >Sat</th>
                     <th >Sun</th>
                     <th >Wks Total</th>
-                    <th >Length</th>
-                    <th >Description</th>
-                 
-                    <th >Copy ID</th>
-                    <th >Qty</th>
-                    <th >Item cost</th>
-                    <th >Total cost</th>
+                    
+                
+                      <th >Qty</th>
+                   
                     </tr>
         </thead>
         <tbody>
-          <tr>
+        {
+             finaldata.map((item)=>{
+              return(
+             <tr>
+              <td>{item.name}</td>
+              <td>{item.phone}</td>
+              <td>{item.email}</td>
+              <td>{item.product_type}</td>
+              
+{
+  item.fields && item.fields.map((items)=>{
+            return(
 
-          </tr>
+ items && items.map((data)=>{
+      return(
 
+
+        <>
+            <td className="td-invoice">{moment(data.start_date).utc().format('MM/DD/YY')+"-"+ moment(data.end_date).utc().format('MM/DD/YY')}</td>
+                  
+
+               
+                   
+                   <td >{data.monday}</td> 
+                  
+                    <td >{data.tuesday}</td> 
+                    <td >{data.wednesday}</td> 
+                     <td >{data.thursday}</td> 
+                     <td >{data.friday}</td>
+                     <td >{data.saturday}</td>
+                    <td >{data.sunday}</td>
+                    <td >{data.total}</td>
+                    
+                    
+                     <td >{data.qty}</td>
+                    
+        </>
+      )
+ })
+
+             
+       )
+   })
+
+}
+</tr>
+
+
+
+)
+})
+}
         </tbody>
 
       </Table>

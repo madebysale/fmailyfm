@@ -13,8 +13,16 @@ import popup1 from './component/Popup1'
 import Popup1 from './component/Popup1';
 import MyModal from './component/MyModel';
 import Admin from './component/Admin';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { HashRouter,Routes ,Route, } from 'react-router-dom';
 import Nopagefound from './component/Nopagefound';
+import Pdf from './component/Pdf';
+import Mypdf from'./component/Mypdf';
+import Adminpanel from './component/Adminpanel';
+import Tablemake from './component/Tablemake';
+import Mytable from './component/Mytable';
+import AdminPanel from './component/Adminpanel';
+import Tabletable from './component/Tabletble';
+import Viewdetail from './component/Viewdetail';
 
 // import SignaturePad from './component/SignaturePad';
 // import Logo from './component/Logo';
@@ -33,21 +41,36 @@ function App() {
   return (
     <div className="App">
 
-        <BrowserRouter>
-      <Routes>
-
+        <HashRouter>
+      
+        <Routes>
         <Route path="/" element={<Form/>} />
         <Route path="/invoice" element={<Invoice/>}/>
         <Route path ="*" element={<Nopagefound/>}/>
+        <Route path ="/termandcondition" element={<Termcondition/>}/>
+        <Route path='/admin'element={<Tabletable/>} />
+        <Route path='/viewdetail/:id'element={<Viewdetail/>} />
       
-
-      </Routes>
+        </Routes>
+    
 
     
-      </BrowserRouter>    
-      {/* <Agreementpage/>
-    <Form />
-    {/* <Chatgpt2/> */}
+      </HashRouter>   
+
+{/* 
+      const Message = () => (
+  <div>
+    <Route path={ "/viewdetail"} element={<Viewdetail/>} />
+  </div>
+); */}
+
+
+
+       {/* <Agreementpage/> */}
+    {/* <Form /> */}
+
+{/* <AdminPanel/> */}
+    {/* <Chatgpt2/> 
     {/* <Addrow/> */}
     {/* <Chatgpt/> */}
     {/* <Field/> */}
@@ -55,10 +78,16 @@ function App() {
     {/* <DateRangePicker/> */}
      {/* <Footer/> */}
    {/* <Invoice  /> */}
+   {/* <Mypdf/> */}
    {/* <Admin/> */}
+   {/* <Adminpanel/> */}
    {/* <Termcondition/> */}
    {/* <Popup1/> */}
   {/* <MyModal/> */}
+  {/* <Pdf/> */}
+  {/* <Tablemake/> */}
+  {/* <Mytable/> */}
+  {/* <Tabletable/> */}
   
     </div>
   );

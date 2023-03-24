@@ -18,10 +18,7 @@ function Popup(props) {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  // useEffect(() => {
-  //   var finaltotal =(parseFloat(value1)+ parseFloat(value2)+ parseFloat(value3)+parseFloat(value4)+parseFloat(value5)+parseFloat(value6)+parseFloat(value7))
-  //  props.handlefunction(finaltotal)
-  //   settotal()
+ 
 
   // },[] )
   useEffect(() => {
