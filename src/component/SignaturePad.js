@@ -38,9 +38,12 @@ function SignaturePad({setsign}) {
 
   return (
     <div className="signature-pad">
-      <SignatureCanvas ref={signRef} options={options} />
+      <SignatureCanvas ref={signRef} options={options}/>
+      <div className='sign-res-btn'>
       <Button className='sign-button' onClick={handleClear}>Clear</Button>
       <Button className='sign-button-1' onClick={handle}>confirm Signature</Button>
+      </div>
+      
   
     </div>
       

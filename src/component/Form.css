@@ -168,7 +168,7 @@
   }
 
   .date-range{
-    border: 1px solid #ced4da !important;
+    /* border: 1px solid #ced4da !important; */
     border-radius: 0.375rem !important;
     font-weight: 500 !important;
     color: #000000;
@@ -232,7 +232,7 @@
 
      /* width: 500px;  */
        float: right;
-       right: 100px;
+       right: 120px;
        bottom: 100px;
       font-weight: 500;
       flex-direction: row;
@@ -260,7 +260,7 @@
     /* display: flex; */
     /* right: 150px; */
        /* bottom: 100px; */
-       display: ;
+       /* display: ; */
   }
   
 
@@ -335,6 +335,8 @@
   }
 
 
+
+
   .table-1{
     width: 90% ;
     background-color: #fff !important;
@@ -369,6 +371,7 @@
     padding: 10px;
     font-weight: 200;
     font-size: 16px;
+    margin-left: 90px;
   }
   .term-12{
     color: red;
@@ -403,7 +406,74 @@ only screen and (max-width: 760px),
 
   }
 
+  .dropdown{
+    width: 110px;
+  }
 
+  .date-range{
+    width: 127px;
+  }
+  .popup-btn{
+    width: 100px;
+  }
+
+    .table-responsive {
+    border-collapse: collapse;
+    overflow-x: auto;
+    display: block;
+    width: -moz-fit-content;
+    width: fit-content;
+    max-width: 100%;
+    font-size: 12px;
+}
+ 
+  .error-message{
+    font-size: 12px;
+  }
+  .sign-button{
+    padding: 3px 8px !important;
+    width: 80px !important;
+  }
+  .sign-button-1{
+    padding: 3px 8px !important;
+  }
+
+  .submit-button{
+    padding: 5px 3px !important;
+    width: 130px !important;
+  }
+
+  .contact-detail{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .chcek-box{
+    font-size: 12px;
+    margin-left: 10PX;
+  }
+
+  .add-btn{
+    font-size: 12px !important;
+  }
+   
+  .form {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column-reverse;
+    flex-direction: column-reverse;
+    
+  }
+  .popup-btn{
+    margin-left: 1px;
+  }
+
+  .chcek-box{
+    position: relative;
+    right: 40px;
+    bottom: 79px;
+
+  }
 
 
   .form-container{
@@ -413,7 +483,7 @@ only screen and (max-width: 760px),
   }
 
 .form-con{
-  width: 200% !important;
+  width: 100% !important;
   height: 180%;
 }
 
@@ -422,12 +492,41 @@ only screen and (max-width: 760px),
   font-size: 12px;
 }
 
+.logout-i{
+  margin-right: -36px;
+}
 
+
+.signature-pad {
+  /* position: relative;
+  margin-top: 20px;
+  border: 2px solid #151414; */
+   width: 46%; 
+  /* height: 150px;
+  bottom: 50px;
+  left: 20px;*/
+} 
+.sign-res-btn{
+  display: flex;
+  font-size: 10px !important;
+}
+
+.submit-button{
+  font-size: 10px;
+}
+
+.sign-button{
+  font-size: 10px !important;
+}
+.sign-button-1{
+  font-size: 12px !important;
+}
 
 .img-1{
 
   width: 150px;
   height:100px;
+  margin-right: -110px;
  /* margin-left: 30px; */
  /* margin-right: -120px; */
  align-items: center;
@@ -435,7 +534,9 @@ only screen and (max-width: 760px),
   
 }
 
-
+/* .table-form{
+  width:60%;
+} */
 
 
 
